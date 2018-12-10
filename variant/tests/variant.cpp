@@ -40,6 +40,39 @@ TEST_CASE("variant::recursive_array2")
     CHECK(std::get<float>(std::get<number>(std::get<boost::recursive_wrapper<recursive_array2>>(arr[2]).get()[1])) == 9.0f);
 }
 
+TEST_CASE("variant::variant_decorator")
+{
+    variant_decorator<std::string, float, int, boost::recursive_wrapper<bool>> v{86};
+    CHECK(std::get<int>(v) == 86);
+
+    SECTION("content")
+    {
+        v = std::string("text");
+        CHECK(v.as<std::string>() == "text");
+
+        v = 33.56f;
+        CHECK(v.as<float>() == Approx(33.56f));
+    }
+
+    SECTION("const")
+    {
+        const auto cv = v;
+        CHECK(cv.as<int>() == 86);
+    }
+
+    SECTION("mutable")
+    {
+        v.as<int>() = 53;
+        CHECK(v.as<int>() == 53);
+    }
+
+    SECTION("recursive_wrapper")
+    {
+        v = boost::recursive_wrapper<bool>{true};
+        CHECK(v.as<bool>() == true);
+    }
+}
+
 TEST_CASE("variant::recursive_map")
 {
     using namespace std::string_literals;

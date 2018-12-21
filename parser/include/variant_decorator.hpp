@@ -16,18 +16,30 @@ namespace x3 = boost::spirit::x3;
 //? How many constructors did I inherit?
 //? Do I need my own constructor & ``operator=``? Why?
 //{
-template<???>
-struct variant_decorator: public x3::variant<???>
+template<class... Args>
+struct variant_decorator: public x3::variant<Args...>
 {
-    using ???operator=;
-    using ...
+    using x3::variant<Args...>::operator=;
+    using x3::variant<Args...>::variant;
+
+    variant_decorator()=default;
+    variant_decorator(variant_decorator const&)=default;
+
+    variant_decorator& operator=(variant_decorator const&)=default;
 
     //? Do I need a ``const``-version?
     template<class T>
     T& as()
     {
-        return ...
+        return boost::get<T>(*this);
     }
+
+    template<class T>
+    const T& as() const
+    {
+        return boost::get<T>(*this);
+    }
+};
 //}
 
 #endif // __VARIANT_DECORATOR_HPP__

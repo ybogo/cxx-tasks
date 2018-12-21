@@ -37,6 +37,7 @@ TEST_CASE("variant_decorator::as")
     CHECK(v.as<int>() == 45);
 
     //? Why shouldn't use just "text"?
+    //! Just "text" is *char type. We should cast it to std::string
     v = variant_decorator<std::string, bool>{"text"s};
     auto& inner = v.as<variant_decorator<std::string, bool>>();
     CHECK(inner.as<std::string>() == "text");

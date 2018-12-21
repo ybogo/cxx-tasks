@@ -36,6 +36,7 @@ namespace types
     namespace csv
     {
         //? Which kind of types should I use to describe the CSV type?
+        //! CSV stands for comma separated value. This means that it is two-dimensional array of values
         //{
         using csv = std::vector<std::vector<std::string>>;
         //}

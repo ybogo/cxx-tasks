@@ -31,7 +31,7 @@ public:
         size_t rest = (n > 0) ? width_ - index_ % stride_  - 1: index_ % stride_;
         size_t stride_count = 0;
 
-        if (abs(n) > rest)
+        if (abs(n) > (int)rest)
         {
             stride_count = ceil((double)(abs(n) - rest) / width_);
         }

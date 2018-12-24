@@ -126,6 +126,7 @@ TEST_CASE("json::operator_json")
     auto i = R"({"text": "message", "number": 123})"_json;
     const auto& j = i.as<types::json::object>();
     //? Why not just ``j["text"]``?
+    //! If key "text" not exsist operator[] will insert new element. At the same time at() method will throw an exception
     CHECK(j.at("text").as<std::string>() == "message");
     CHECK(j.at("number").as<int>() == 123);
 }

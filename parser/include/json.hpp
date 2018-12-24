@@ -51,7 +51,9 @@ namespace parser
     namespace json
     {
         //? Why I need ``sfloat_`` instead of just ``x3::float_``?
+        //! It sets the rule that float number should always be declared with dot.  
         //? What is the syntax ``class array_``? Is it wrong?
+        //! When we use ``class array_`` we say to the compiler that we didnt define ``array_`` yet but we will define it later. Without ``class`` keyword the compiler will crash because this class is incomplete 
         const auto sfloat_ = x3::real_parser<float, x3::strict_real_policies<float>>();
 
         //{ describe json grammar

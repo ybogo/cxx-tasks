@@ -69,8 +69,10 @@ TEST_CASE("proxy::threadsafe")
     for (auto _ : boost::irange(0, 20))
     {
         //? Why I need ``std::promise`` here?
+        //! std::promise is needed to avoid p->i assignment before p->sleep call
         std::promise<void> notifier;
         //? Why I don't use ``thr`` anywhere? How the innder thread will be released?
+        //! thr is std::future. The inner thread will be released when this future will be destroyed
         auto thr = std::async([&p, &notifier]()
         {
             notifier.set_value();

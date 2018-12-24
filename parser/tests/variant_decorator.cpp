@@ -37,6 +37,7 @@ TEST_CASE("variant_decorator::as")
     CHECK(v.as<int>() == 45);
 
     //? Why shouldn't use just "text"?
+    //! Just "text" is *char type. We should put it in variant_decorator as std::string but as it said in over.ics.rank 2.1: "a standard conversion sequence is a better conversion sequence than a user-defined conversion sequence or an ellipsis conversion sequence". This means that char* will be casted to bool. Thats why we should cast it to std::string explicitly
     v = variant_decorator<std::string, bool>{"text"s};
     auto& inner = v.as<variant_decorator<std::string, bool>>();
     CHECK(inner.as<std::string>() == "text");

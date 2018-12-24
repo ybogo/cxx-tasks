@@ -36,6 +36,7 @@ namespace types
     namespace csv
     {
         //? Which kind of types should I use to describe the CSV type?
+        //! CSV stands for comma separated value. This means that it is two-dimensional array of values
         //{
         using csv = std::vector<std::vector<std::string>>;
         //}
@@ -48,6 +49,7 @@ namespace parser
     {
         //? Why I need a x3::no_skip here? Where is the original of the error?
         //? Where is BOOST_SPIRIT_DEFINE? Is it necessary?
+        //! BOOST_SPIRIT_DEFINE is used to tie rule with its defenition. In case of csv parser we can do it explicitly because we dont have recursive rules. Thats why it not necessary here 
         namespace x3 = boost::spirit::x3;
 
         //{ csv grammar
